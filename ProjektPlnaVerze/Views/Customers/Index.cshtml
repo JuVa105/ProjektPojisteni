@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProjektPlnaVerze.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pojištěnci</h1>
+@if (User.IsInRole("admin"))
+{
+    <div class="text-center pb-5">
+
+        <a class="btn btn-primary" id="NovyPojistenec" asp-action="Create">Nový pojištěnec</a>
+
+    </div>
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            
+            
+            
+            <th>
+                Bydliště
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action ="Details" asp-route-id="@item.Id">
+                @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.LastName)
+                    </a>
+            </td>
+            
+            <td>
+                    
+                        @Html.DisplayFor(modelItem => item.StreetAndNumber),
+                    @Html.DisplayFor(modelItem => item.City)
+                    
+            </td>
+           
+            <td>
+                @if (User.IsInRole("admin"))
+                {
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Odstranit</a>
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Editovat</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

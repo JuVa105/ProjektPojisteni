@@ -1,0 +1,59 @@
+﻿@model ProjektPlnaVerze.Models.Insurance
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>Nové pojištění</h4>
+<hr />
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+            <div class="form-group col-4">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class ="form-control" asp-items="@ViewBag.Customers"></select>
+            </div>
+            <div class="form-group col-4">
+                <label asp-for="TypeOfInsurance" class="control-label"></label>
+                <input asp-for="TypeOfInsurance" class="form-control" />
+                <span asp-validation-for="TypeOfInsurance" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="row">
+            <div class="form-group col-4">
+                <label asp-for="Value" class="control-label"></label>
+                <input type="text" asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group col-4">
+                <label asp-for="ObjectOfInsurance" class="control-label"></label>
+                <input asp-for="ObjectOfInsurance" class="form-control" />
+                <span asp-validation-for="ObjectOfInsurance" class="text-danger"></span>
+            </div>
+    </div>
+    <div class="row">
+            <div class="form-group col-4">
+                <label asp-for="StartingFrom" class="control-label"></label>
+                <input asp-for="StartingFrom" class="form-control" />
+                <span asp-validation-for="StartingFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group col-4">
+                <label asp-for="Ending" class="control-label"></label>
+                <input asp-for="Ending" class="form-control" />
+                <span asp-validation-for="Ending" class="text-danger"></span>
+            </div>
+    </div>
+    <div class="form-group mt-4 d-flex align-items-center justify-content-center">
+                <input type="submit" value="Uložit" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

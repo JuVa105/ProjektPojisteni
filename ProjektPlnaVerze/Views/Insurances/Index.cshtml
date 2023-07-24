@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ProjektPlnaVerze.Models.Insurance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pojištění</h1>
+
+@if (User.IsInRole("admin"))
+{
+    <div class="text-center pb-5">
+
+        <a class="btn btn-primary" asp-action="Create">Nové pojištění</a>
+
+    </div>
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeOfInsurance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    
+                        
+                   
+                @Html.DisplayFor(modelItem => item.Customer.LastName)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                @Html.DisplayFor(modelItem => item.TypeOfInsurance)
+                    </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value) Kč
+            </td>
+          
+            <td>
+                 @if (User.IsInRole("admin"))
+                 {
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Editovat</a> 
+                
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Odstranit</a>
+                 }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

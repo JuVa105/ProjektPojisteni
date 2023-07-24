@@ -1,0 +1,57 @@
+﻿@model ProjektPlnaVerze.Models.Insurance
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<h4>Editace pojištění</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.Customers"></select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeOfInsurance" class="control-label"></label>
+                <input asp-for="TypeOfInsurance" class="form-control" />
+                <span asp-validation-for="TypeOfInsurance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ObjectOfInsurance" class="control-label"></label>
+                <input asp-for="ObjectOfInsurance" class="form-control" />
+                <span asp-validation-for="ObjectOfInsurance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartingFrom" class="control-label"></label>
+                <input asp-for="StartingFrom" class="form-control" />
+                <span asp-validation-for="StartingFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ending" class="control-label"></label>
+                <input asp-for="Ending" class="form-control" />
+                <span asp-validation-for="Ending" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Uložit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

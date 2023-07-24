@@ -1,0 +1,83 @@
+﻿@model ProjektPlnaVerze.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid">
+    <div class="row my-5">
+<div class="col-2">
+    <img src="~/images/user.png" class="img-fluid w-75"/>
+</div>
+<div class="col-4">
+   
+        <h3 class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+                @Html.DisplayFor(model => model.LastName)
+           
+        </h3>
+        
+         
+        
+        <p class = "col-sm-10">
+            @Html.DisplayFor(model => model.StreetAndNumber)<br />
+
+            @Html.DisplayFor(model => model.City)<br />
+        
+            @Html.DisplayFor(model => model.ZipCode)
+        </p>
+</div>
+ <div class="col-6">
+
+            <p class="col-sm-10 pt-5">
+                @Html.DisplayFor(model => model.Email)<br />
+           
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </p>
+    
+</div>
+    </div>
+</div>
+<h3>
+    @Html.DisplayNameFor(model => model.MyInsurancies)
+</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Pojištění
+            </th>
+           <th>
+               Částka
+           </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var insurance in Model.MyInsurancies)
+        {
+            <tr>
+                <td>
+                    @insurance.TypeOfInsurance
+                </td>
+                <td>
+                    @insurance.Value Kč
+                </td>
+                <td>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <a class="btn btn-danger" asp-controller="Insurances" asp-action="Delete" asp-route-id="@insurance.Id">Odstranit</a>
+                        <a class="btn btn-warning" asp-controller="Insurances" asp-action="Edit" asp-route-id="@insurance.Id">Editovat</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (User.IsInRole("admin"))
+{
+    <div class=" container d-flex align-items-center justify-content-center ">
+        <a class="btn btn-primary mx-1" asp-controller="Insurances" asp-action="Create" asp-route-id="@Model?.Id">Přidat pojištění</a>
+        <a class="btn btn-warning mx-1" asp-action="Edit" asp-route-id="@Model?.Id">Editovat pojištěnce</a>
+        <a class="btn btn-danger mx-1" asp-action="Delete" asp-route-id="@Model?.Id">Odstranit pojištěnce</a>
+    </div>
+}
